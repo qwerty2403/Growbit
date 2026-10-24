@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>그로빗 | 우리 가게 성장 도우미</title>
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: -apple-system, sans-serif; background: #f5f7f4; color: #202820; }
+    header { padding: 24px 20px; background: #174b35; color: white; }
+    header h1 { margin: 0; font-size: 27px; }
+    header p { margin-bottom: 0; color: #d7eadb; }
+    main { max-width: 650px; margin: auto; padding: 20px; }
+    .card { background: white; border-radius: 18px; padding: 20px; margin-bottom: 16px; box-shadow: 0 3px 15px #163a1510; }
+    label { display: block; font-weight: 600; margin: 12px 0 8px; }
+    input, select, textarea { width: 100%; padding: 13px; border: 1px solid #d9e1d8; border-radius: 10px; font: inherit; background: white; }
+    textarea { min-height: 85px; resize: vertical; }
+    button { border: 0; border-radius: 11px; padding: 14px; font-size: 16px; font-weight: 700; cursor: pointer; }
+    .primary { width: 100%; color: white; background: #24764c; margin-top: 16px; }
+    .tag { display: inline-block; background: #e8f4e9; color: #24764c; border-radius: 20px; padding: 7px 11px; font-size: 13px; }
+    #result { white-space: pre-wrap; line-height: 1.7; }
+    .muted { color: #6b776b; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="tag">SMALL BUSINESS AI</span>
+    <h1>그로빗 GROVIT</h1>
+    <p>AI로 찾는 우리 가게의 성장 기회</p>
+  </header>
+  <main>
+    <section class="card">
+      <h2>우리 가게 진단하기</h2>
+      <p class="muted">가게 정보를 입력하면 맞춤형 성장 아이디어를 정리해 드려요.</p>
+      <label for="store">가게 이름</label>
+      <input id="store" placeholder="예: 오늘의 디저트">
+      <label for="type">업종</label>
+      <select id="type">
+        <option>카페·디저트</option>
+        <option>음식점</option>
+        <option>패션·소품</option>
+        <option>뷰티·미용</option>
+        <option>생활서비스</option>
+        <option>기타 소상공인</option>
+      </select>
+      <label for="customer">주요 고객</label>
+      <input id="customer" placeholder="예: 20대 대학생">
+      <label for="problem">가장 고민되는 점</label>
+      <textarea id="problem" placeholder="예: 신규 고객이 적고 재방문율이 낮아요."></textarea>
+      <button class="primary" onclick="diagnose()">성장 아이디어 확인하기</button>
+    </section>
+    <section class="card" id="output" hidden>
+      <h2>우리 가게 성장 아이디어</h2>
+      <div id="result"></div>
+      <p class="muted">이 결과는 입력 정보를 바탕으로 만든 기본 제안이며, 외부 AI 서비스와 연결된 분석은 아닙니다.</p>
+      <button onclick="window.print()">결과 저장·인쇄</button>
+    </section>
+  </main>
+  <script>
+    function diagnose() {
+      const store = document.getElementById('store').value.trim() || '우리 가게';
+      const type = document.getElementById('type').value;
+      const customer = document.getElementById('customer').value.trim() || '지역 고객';
+      const problem = document.getElementById('problem').value.trim() || '매출 성장';
+      const ideas = [
+        '고객이 자주 찾는 시간대와 인기 상품을 기록해 집중할 상품을 찾아보세요.',
+        '주요 고객층이 관심 가질 만한 짧은 콘텐츠를 주 2회 게시해 보세요.',
+        '재방문 고객을 위한 쿠폰이나 신상품 체험 이벤트를 소규모로 시험해 보세요.'
+      ];
+      document.getElementById('result').textContent =
+        store + ' 성장 진단\\n\\n업종: ' + type +
+        '\\n주요 고객: ' + customer + '\\n고민: ' + problem +
+        '\\n\\n추천 실행 계획\\n1. ' + ideas[0] +
+        '\\n2. ' + ideas[1] + '\\n3. ' + ideas[2] +
+        '\\n\\n이번 주 할 일: 한 가지 아이디어를 선택해 실행하고 결과를 기록하세요.';
+      document.getElementById('output').hidden = false;
+      document.getElementById('output').scrollIntoView({behavior:'smooth'});
+    }
+  </script>
+</body>
+</html>

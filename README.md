@@ -1,1 +1,1 @@
-# Growbit
+# Growbit project
